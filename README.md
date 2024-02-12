@@ -1,5 +1,5 @@
 # DPPtTrophyGardenDailiyEncounterRNGTool <img src="https://github.com/Real96/DPPtTrophyGardenDailiyEncounterRNGTool/assets/20956021/06d173e6-95aa-480b-84c6-b5de8358505e" title="Mr. Backlot"></td>
-This tool will let you RNG abuse Trophy Garden daily encounter in DPPt games
+This tool will let you RNG abuse Trophy Garden daily encounters in DPPt games
 
 ## Trophy Garden daily encounters table
 <table>
