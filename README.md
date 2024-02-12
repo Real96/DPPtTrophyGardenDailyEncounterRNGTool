@@ -14,6 +14,10 @@ This tool will let you RNG abuse Trophy Garden daily encounter in DPPt games
   </tr>
   <tr align="center">
     <td>6,25%</td>
+    <td colspan="2"><img src="https://github.com/PokeAPI/sprites/blob/master/sprites/pokemon/versions/generation-viii/icons/438.png" title="Bonsly"></td>
+  </tr>
+  <tr align="center">
+    <td>6,25%</td>
     <td colspan="2"><img src="https://github.com/PokeAPI/sprites/blob/master/sprites/pokemon/versions/generation-viii/icons/440.png" title="Happiny"></td>
   </tr>
   <tr align="center">
