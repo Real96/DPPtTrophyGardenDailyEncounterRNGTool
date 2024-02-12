@@ -1,8 +1,12 @@
 # DPPtTrophyGardenDailiyEncounterRNGTool ![Mr. Backlot](https://github.com/Real96/DPPtTrophyGardenDailiyEncounterRNGTool/assets/20956021/06d173e6-95aa-480b-84c6-b5de8358505e)
 
+This tool will let you RNG abuse Trophy Garden daily encounter in DPPt games
+
+## Trophy Garden daily encounters table
 <table>
   <tr align="center">
-    <td colspan="3">Trophy Garden daily encounters</td>
+    <td>Percentage</td>
+    <td colspan="2">Encounter</td>
   </tr>
   <tr align="center">
     <td>6,25%</td>
@@ -71,3 +75,8 @@
     <td colspan="2"><img src="https://github.com/PokeAPI/sprites/blob/master/sprites/pokemon/versions/generation-viii/icons/298.png" title="Azurill"></td>
   </tr>
 </table>
+
+## Compiling
+```
+g++ DPPtTrophyGardenDailiyEncountersRNGTool.cpp.cpp -o DPPtTrophyGardenDailiyEncountersRNGTool.cpp.exe -std=c++20 --static
+```
