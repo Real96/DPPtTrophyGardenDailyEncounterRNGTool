@@ -78,5 +78,5 @@ This tool will let you RNG abuse Trophy Garden daily encounter in DPPt games
 
 ## Compiling
 ```
-g++ DPPtTrophyGardenDailiyEncountersRNGTool.cpp.cpp -o DPPtTrophyGardenDailiyEncountersRNGTool.cpp.exe -std=c++20 --static
+g++ DPPtTrophyGardenDailiyEncountersRNGTool.cpp.cpp -o DPPtTrophyGardenDailiyEncountersRNGTool.exe -std=c++20 --static
 ```
