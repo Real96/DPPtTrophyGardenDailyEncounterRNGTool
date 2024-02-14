@@ -83,8 +83,10 @@ bool isWantedEncounterCheck(uint32_t &seed, short index) {
 }
 
 void findTrophyGardenPokemon(short index, uint32_t seed, unsigned long advances) {
-    for (;; advances++) {
-        if (!isWantedEncounterCheck(seed, index)) {
+    for (;; advances++, advanceRNG(seed)) {
+        uint32_t tempSeed = seed;
+
+        if (!isWantedEncounterCheck(tempSeed, index)) {
             continue;
         }
 
