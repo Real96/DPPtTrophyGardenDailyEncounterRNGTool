@@ -53,10 +53,10 @@ void sanitizeHexInput(uint32_t &seed) {
     seed = stoul(stringSeed, nullptr, 16);
 }
 
-void getRNGInput(uint32_t &seed, unsigned long &advances, bool &researchFlag) {
-    researchFlag = sanitizeYesNoInput("Do you know the initial seed? (y/n) ");
+void getRNGInput(uint32_t &seed, unsigned long &advances, bool &knownSeedFlag) {
+    knownSeedFlag = sanitizeYesNoInput("Do you know the initial seed? (y/n) ");
 
-    if (researchFlag) {
+    if (knownSeedFlag) {
         sanitizeHexInput(seed);
         sanitizeInput<unsigned long>("Insert the current advances: ", advances, 0, ULONG_MAX);
     }
@@ -66,24 +66,25 @@ uint32_t LCRNG(uint32_t seed) {
     return 0x41C64E6D * seed + 0x6073;
 }
 
-void advanceRNG(uint32_t &seed, unsigned long n = 1) {
+uint32_t advanceRNG(uint32_t &seed, unsigned long n = 1) {
     for (unsigned long i = 0; i < n; i++) {
         seed = LCRNG(seed);
     }
+
+    return seed;
 }
 
 uint8_t getUpper4Bit(uint32_t seed) {
     return seed >> 28;
 }
 
-bool isWantedEncounterCheck(uint32_t seed, short index) {
-    return getUpper4Bit(seed) == index - 1;
+bool isWantedEncounterCheck(uint32_t &seed, short index) {
+    return getUpper4Bit(advanceRNG(seed)) == index - 1;
 }
 
 void findTrophyGardenPokemon(short index, uint32_t seed, unsigned long advances) {
     for (;; advances++) {
-        if (!isWantedEncounterCheck(LCRNG(seed), index)) {
-            advanceRNG(seed);
+        if (!isWantedEncounterCheck(seed, index)) {
             continue;
         }
 
@@ -107,8 +108,7 @@ void findTrophyGardenSeed(short index) {
                 uint32_t tempSeed = seed;
 
                 for (unsigned long advances = 0; advances < maxAdvances; advances++) {
-                    if (!isWantedEncounterCheck(LCRNG(tempSeed), index)) {
-                        advanceRNG(tempSeed);
+                    if (!isWantedEncounterCheck(tempSeed, index)) {
                         continue;
                     }
 
@@ -124,14 +124,14 @@ int main() {
     short encounterIndex;
     uint32_t initialSeed;
     unsigned long currentAdvances;
-    bool seedResearchFlag;
+    bool knownSeedFlag;
 
     while (true) {
         printTropyGardenDailiyEncounters();
         sanitizeInput<short>("Insert the wanted encounter index: ", encounterIndex, 1, 16);
-        getRNGInput(initialSeed, currentAdvances, seedResearchFlag);
+        getRNGInput(initialSeed, currentAdvances, knownSeedFlag);
 
-        if (seedResearchFlag) {
+        if (knownSeedFlag) {
             advanceRNG(initialSeed, currentAdvances);
             findTrophyGardenPokemon(encounterIndex, initialSeed, currentAdvances);
             continue;
