@@ -81,7 +81,7 @@ bool isWantedEncounterCheck(uint32_t seed, short index) {
 }
 
 void findTrophyGardenPokemon(short index, uint32_t seed, unsigned long advances) {
-    for (bool found = false; !found; advances++) {
+    for (;; advances++) {
         uint32_t tempSeed = LCRNG(seed);
 
         if (!isWantedEncounterCheck(tempSeed, index)) {
@@ -89,13 +89,12 @@ void findTrophyGardenPokemon(short index, uint32_t seed, unsigned long advances)
             continue;
         }
 
-        found = true;
         printf("\n\nTarget seed: %08X | Target advances: %lu\n\n------------------------------------------------\n\n", seed, advances);
+        return;
     }
 }
 
 void findTrophyGardenSeed(short index) {
-    bool foundFalg = false;
     const short hour = 24, maxDelay = 10000;
     short minDelay;
     unsigned long maxAdvances;
@@ -103,9 +102,9 @@ void findTrophyGardenSeed(short index) {
     sanitizeInput<short>("Insert the min delay: ", minDelay, 600, 9999);
     sanitizeInput<unsigned long>("Insert the max advances: ", maxAdvances, 1, ULONG_MAX);
 
-    for (short ab = 0; ab < 256 && !foundFalg; ab++) {
-        for (short cd = 0; cd < hour && !foundFalg; cd++) {
-            for (short efgh = minDelay; efgh < maxDelay && !foundFalg; efgh++) {
+    for (short ab = 0; ab < 256; ab++) {
+        for (short cd = 0; cd < hour; cd++) {
+            for (short efgh = minDelay; efgh < maxDelay; efgh++) {
                 uint32_t seed = ((ab << 24) | (cd << 16)) + efgh;
                 uint32_t tempSeed = seed;
 
@@ -117,9 +116,8 @@ void findTrophyGardenSeed(short index) {
                         continue;
                     }
 
-                    foundFalg = true;
                     printf("\n\nTarget seed: %08X | Target advances: %lu\n\n------------------------------------------------\n\n", seed, advances);
-                    break;
+                    return;
                 }
             }
         }
