@@ -4,7 +4,7 @@ This tool will let you RNG abuse Trophy Garden daily encounter in DPPt games
 ## Trophy Garden daily encounters table
 <table>
   <tr align="center">
-    <td>Percentage</td>
+    <td>Rate</td>
     <td colspan="2">Encounter</td>
   </tr>
   <tr align="center">
