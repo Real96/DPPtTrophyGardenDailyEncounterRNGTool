@@ -50,8 +50,8 @@ This tool will let you RNG abuse Trophy Garden daily encounter in DPPt games
     <td><img src="https://github.com/Real96/DPPtHoneyTreeRNGTool/assets/20956021/a5509f23-652f-4433-90f8-d97b7881802b" title="Pt" height="10"></td>
   </tr>
   <tr align="center">
-    <td><img src="https://github.com/PokeAPI/sprites/blob/master/sprites/pokemon/versions/generation-viii/icons/137.png" title="Porygon" height="40"></td>
-    <td><img src="https://github.com/PokeAPI/sprites/blob/master/sprites/pokemon/versions/generation-viii/icons/132.png" title="Ditto" height="40"></td>
+    <td><img src="https://github.com/PokeAPI/sprites/blob/master/sprites/pokemon/versions/generation-viii/icons/137.png" title="Porygon" width="40"></td>
+    <td><img src="https://github.com/PokeAPI/sprites/blob/master/sprites/pokemon/versions/generation-viii/icons/132.png" title="Ditto" width="40"></td>
   </tr>
   <tr align="center">
     <td>6,25%</td>
