@@ -1,9 +1,8 @@
 #include <iostream>
+#include <math.h>
 #include <string_view>
 #include <array>
 #include <regex>
-#include <math.h>
-#include <cstdint>
 
 using namespace std;
 
@@ -22,16 +21,16 @@ void printTropyGardenDailiyEncounters() {
 }
 
 template <typename T>
-void sanitizeInput(const string &output, T &index, T lowLimit, T highLimit) {
-    while ((cout << output) && (!(cin >> index) || (index < lowLimit || index > highLimit))) {
+void sanitizeInput(const string output, T &value, const T lowLimit, const T highLimit) {
+    while ((cout << output) && (!(cin >> value) || (value < lowLimit || value > highLimit))) {
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
 }
 
-bool sanitizeYesNoInput(const string &output) {
+bool sanitizeYesNoInput(const string output) {
     string yesNoAnswer;
-    regex yesNoRegex("^[nyNY]$");
+    const regex yesNoRegex("^[nyNY]$");
 
     while ((cout << output) && (!(cin >> yesNoAnswer) || !regex_match(yesNoAnswer, yesNoRegex))) {
         cin.clear();
@@ -43,7 +42,7 @@ bool sanitizeYesNoInput(const string &output) {
 
 void sanitizeHexInput(uint32_t &seed) {
     string stringSeed;
-    regex hexRegex("^[0-9a-fA-F]{1,8}$");
+    const regex hexRegex("^[0-9a-fA-F]{1,8}$");
 
     while ((cout << "Insert the initial seed: ") && (!(cin >> stringSeed) || !regex_match(stringSeed, hexRegex))) {
         cin.clear();
@@ -53,7 +52,8 @@ void sanitizeHexInput(uint32_t &seed) {
     seed = stoul(stringSeed, nullptr, 16);
 }
 
-void getRNGInput(uint32_t &seed, unsigned long &advances, bool &knownSeedFlag) {
+void getRNGInput(short &encounter, uint32_t &seed, unsigned long &advances, bool &knownSeedFlag) {
+    sanitizeInput<short>("Insert the wanted encounter index: ", encounter, 1, 16);
     knownSeedFlag = sanitizeYesNoInput("Do you know the initial seed? (y/n) ");
 
     if (knownSeedFlag) {
@@ -62,11 +62,11 @@ void getRNGInput(uint32_t &seed, unsigned long &advances, bool &knownSeedFlag) {
     }
 }
 
-uint32_t LCRNG(uint32_t seed) {
+uint32_t LCRNG(const uint32_t seed) {
     return 0x41C64E6D * seed + 0x6073;
 }
 
-uint32_t advanceRNG(uint32_t &seed, unsigned long n = 1) {
+uint32_t advanceRNG(uint32_t &seed, const unsigned long n = 1) {
     for (unsigned long i = 0; i < n; i++) {
         seed = LCRNG(seed);
     }
@@ -74,19 +74,19 @@ uint32_t advanceRNG(uint32_t &seed, unsigned long n = 1) {
     return seed;
 }
 
-uint8_t getUpper4Bit(uint32_t seed) {
+uint8_t getUpper4Bit(const uint32_t seed) {
     return seed >> 28;
 }
 
-bool isWantedEncounterCheck(uint32_t &seed, short index) {
-    return getUpper4Bit(advanceRNG(seed)) == index - 1;
+bool isWantedEncounterCheck(uint32_t &seed, const short encounter) {
+    return getUpper4Bit(advanceRNG(seed)) == encounter - 1;
 }
 
-void findTrophyGardenPokemon(short index, uint32_t seed, unsigned long advances) {
+void findTrophyGardenPokemon(const short encounter, uint32_t seed, unsigned long advances) {
     for (;; advances++, advanceRNG(seed)) {
         uint32_t tempSeed = seed;
 
-        if (!isWantedEncounterCheck(tempSeed, index)) {
+        if (!isWantedEncounterCheck(tempSeed, encounter)) {
             continue;
         }
 
@@ -95,7 +95,7 @@ void findTrophyGardenPokemon(short index, uint32_t seed, unsigned long advances)
     }
 }
 
-void findTrophyGardenSeed(short index) {
+void findTrophyGardenSeed(const short encounter) {
     const short hour = 24, maxDelay = 10000;
     short minDelay;
     unsigned long maxAdvances;
@@ -106,11 +106,11 @@ void findTrophyGardenSeed(short index) {
     for (short ab = 0; ab < 256; ab++) {
         for (short cd = 0; cd < hour; cd++) {
             for (short efgh = minDelay; efgh < maxDelay; efgh++) {
-                uint32_t seed = ((ab << 24) | (cd << 16)) + efgh;
+                const uint32_t seed = ((ab << 24) | (cd << 16)) + efgh;
                 uint32_t tempSeed = seed;
 
                 for (unsigned long advances = 0; advances < maxAdvances; advances++) {
-                    if (!isWantedEncounterCheck(tempSeed, index)) {
+                    if (!isWantedEncounterCheck(tempSeed, encounter)) {
                         continue;
                     }
 
@@ -130,8 +130,7 @@ int main() {
 
     while (true) {
         printTropyGardenDailiyEncounters();
-        sanitizeInput<short>("Insert the wanted encounter index: ", encounterIndex, 1, 16);
-        getRNGInput(initialSeed, currentAdvances, knownSeedFlag);
+        getRNGInput(encounterIndex, initialSeed, currentAdvances, knownSeedFlag);
 
         if (knownSeedFlag) {
             advanceRNG(initialSeed, currentAdvances);
