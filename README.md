@@ -45,8 +45,10 @@ This tool will let you RNG abuse Trophy Garden daily encounter in DPPt games
   </tr>
   <tr align="center">
     <td rowspan="2">6,25%</td>
-    <td><img src="https://github.com/Real96/DPPtHoneyTreeRNGTool/assets/20956021/cae6e50d-5d3b-4beb-bdea-c3bdfae8940a" title="D" width="15">
-    <img src="https://github.com/Real96/DPPtHoneyTreeRNGTool/assets/20956021/bbe51f0e-417c-4359-b1c6-3e2e36a4798a" title="P" width="15"></td>
+    <td>
+      <img src="https://github.com/Real96/DPPtHoneyTreeRNGTool/assets/20956021/cae6e50d-5d3b-4beb-bdea-c3bdfae8940a" title="D" width="15">
+      <img src="https://github.com/Real96/DPPtHoneyTreeRNGTool/assets/20956021/bbe51f0e-417c-4359-b1c6-3e2e36a4798a" title="P" width="15">
+    </td>
     <td><img src="https://github.com/Real96/DPPtHoneyTreeRNGTool/assets/20956021/a5509f23-652f-4433-90f8-d97b7881802b" title="Pt" width="15"></td>
   </tr>
   <tr align="center">
